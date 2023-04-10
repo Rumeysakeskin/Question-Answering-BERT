@@ -11,7 +11,7 @@ This approach has been applied to customer service chatbots, search engines, voi
 
 You can run either this notebook locally (if you have all the dependencies and a GPU) or on Google Colab.
 
-### SQuAD v2.0 and Dataset Format
+### SQuAD v2.0 and Data Format and Conversion
 
  [SQuAD2.0](https://rajpurkar.github.io/SQuAD-explorer/) dataset combines the 100,000 questions in SQuAD1.1 with over 50,000 unanswerable questions written adversarially 
  by crowdworkers to look similar to answerable ones.
@@ -22,10 +22,10 @@ You can run either this notebook locally (if you have all the dependencies and a
 
 - Each question-answer entry has a `question` and a globally unique `id`
  
-- The Boolean flag `is_impossible`, which shows whether a question is answerable or not:
+- The Boolean flag `is_impossible`, which shows whether a question is answerable or not: If the question is answerable, one `answer` entry contains the text span and its starting character index in the context. If the question is not answerable, an empty `answers` list is provided.
 
-If the question is answerable, one `answer` entry contains the text span and its starting character index in the context.
-If the question is not answerable, an empty `answers` list is provided.
+**!!! For the QA task, NVIDIA toolkit accepts data in the SQuAD JSON format. 
+If you have your data in any other format, be sure to convert it in the SQuAD format as below.**
 
 ```python
 {
