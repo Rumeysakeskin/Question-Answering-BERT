@@ -6,7 +6,7 @@ In other words, the model extracts the answer directly from the passage, rather 
 - However, it is important to note that extractive question-answering is limited by the information contained within the provided text passage 
 and may not be able to generate novel or creative answers.
 This approach has been applied to customer service chatbots, search engines, voice assistants etc.
-
+---
 ### Pre-requisitions
 **!!! You can run either this notebook locally (if you have all the dependencies and a GPU) or on Google Colab.**
 
@@ -20,6 +20,7 @@ nvidia-container-runtime > 3.4.0-1
 nvidia-docker2 > 2.5.0-1
 nvidia-driver >= 455.23
 ```
+---
 ### SQuAD v2.0 and Data Format and Conversion
 
  [SQuAD2.0](https://rajpurkar.github.io/SQuAD-explorer/) dataset combines the 100,000 questions in SQuAD1.1 with over 50,000 unanswerable questions written adversarially 
@@ -70,9 +71,9 @@ If you have your data in any other format, be sure to convert it in the SQuAD fo
     ]
 }
 ```
-
+---
 ### Fine-tune BERT QA on the SQuAD Dataset
-
+---
 ### BERT QA Inference 
 
 **!!! The evaluation files (for validation and testing) follow the above format except for it can provide more than one answer to the same question.** 
@@ -80,5 +81,5 @@ If you have your data in any other format, be sure to convert it in the SQuAD fo
 
 
 
-
-- In this study, it is utilized from [question-answering-training-final.ipynb](https://catalog.ngc.nvidia.com/orgs/nvidia/resources/tao_question/version/1/files/question-answering-training-final.ipynb#training). You can find more information here.
+---
+In this study, it is utilized from [question-answering-training-final.ipynb](https://catalog.ngc.nvidia.com/orgs/nvidia/resources/tao_question/version/1/files/question-answering-training-final.ipynb#training). You can find more information here.
