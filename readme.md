@@ -72,13 +72,50 @@ If you have your data in any other format, be sure to convert it in the SQuAD fo
 }
 ```
 ---
+### Configuration Files
+ It's essentially just one command each to run data preprocessing, training, fine-tuning, evaluation, inference, and export! 
+ All configurations happen through YAML spec files.
+ There are sample spec files already [available](https://github.com/NVIDIA/NeMo/tree/main/examples/nlp/question_answering/conf) for you to use directly or as reference to create your own. Through these spec files, you can tune many knobs like the model, dataset, hyperparameters, optimizer etc.
+
+---
 ### Fine-tune BERT QA on the SQuAD Dataset
+For training a QA model in NVIDIA format, we use following commands:
+```python 
+# set language model and tokenizer to be used
+config.model.language_model.pretrained_model_name = "bert-base-uncased"
+config.model.tokenizer.tokenizer_name = "bert-base-uncased"
+
+# path where model will be saved
+config.model.nemo_path = f"{WORK_DIR}/checkpoints/bert_squad_v2_0.nemo"
+
+trainer = pl.Trainer(**config.trainer)
+model = BERTQAModel(config.model, trainer=trainer)
+trainer.fit(model)
+trainer.test(model)
+
+model.save_to(config.model.nemo_path)
+```
+More details about these arguments are present in the [Question_Answering.ipynb](https://github.com/NVIDIA/NeMo/blob/main/tutorials/nlp/Question_Answering.ipynb)
+
 ---
 ### BERT QA Inference 
 
 **!!! The evaluation files (for validation and testing) follow the above format except for it can provide more than one answer to the same question.** 
 **!!!The inference file follows the above format except for it does not require the `answers` and `is_impossible` keywords.**
 
+```python 
+# Load saved model
+model = BERTQAModel.restore_from(config.model.nemo_path)
+
+eval_device = [config.trainer.devices[0]] if isinstance(config.trainer.devices, list) else 1
+model.trainer = pl.Trainer(
+    devices=eval_device,
+    accelerator=config.trainer.accelerator,
+    precision=16,
+    logger=False,
+)
+config.exp_manager.create_checkpoint_callback = False
+```
 
 
 ---
