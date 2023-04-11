@@ -115,8 +115,49 @@ model.trainer = pl.Trainer(
     logger=False,
 )
 config.exp_manager.create_checkpoint_callback = False
+exp_dir = exp_manager(model.trainer, config.exp_manager)
+
+def dump_json(filepath, data):
+    with open(filepath, "w") as f:
+        json.dump(data, f)
+
+def create_inference_data_format(context, question):
+
+  squad_data = {"data": [{"title": "inference", "paragraphs": []}], "version": "v2.1"}
+  squad_data["data"][0]["paragraphs"].append(
+            {
+                "context": context,
+                "qas": [
+                    {"id": 0, "question": question,}
+                ],
+            }
+        )
+  return squad_data
+
+context = "The Amazon rainforest is a moist broadleaf forest that covers most of the Amazon basin of South America. This basin encompasses 7,000,000 square kilometres (2,700,000 sq mi), of which 5,500,000 square kilometres (2,100,000 sq mi) are covered by the rainforest. The majority of the forest is contained within Brazil, with 60% of the rainforest, followed by Peru with 13%, and Colombia with 10%."
+
+question = "Which country has the most?"
+
+inference_filepath = "inference.json"
+
+inference_data = create_inference_data_format(context, question)
+dump_json(inference_filepath, inference_data)
+
+predictions = model.inference("inference.json")
+question = predictions[1][0][0]["question"]
+answer = predictions[1][0][0]["text"]
+probability = predictions[1][0][0]["probability"]
+
+print(f"\n> Question: {question}\n> Answer: {answer}\n Probability: {probability}")
 ```
 
+```python
+100%|██████████| 1/1 [00:00<00:00, 184.29it/s]
+100%|██████████| 1/1 [00:00<00:00, 8112.77it/s]
 
+> Question: Which country has the most?
+> Answer: Brazil
+Probability: 0.9688649039578262
+```
 ---
 In this study, it is utilized from [question-answering-training-final.ipynb](https://catalog.ngc.nvidia.com/orgs/nvidia/resources/tao_question/version/1/files/question-answering-training-final.ipynb#training). You can find more information here.
