@@ -9,7 +9,7 @@ This approach has been applied to customer service chatbots, search engines, voi
 ---
 ### Table Of Contents
 - [Pre-requisitions](#Pre-requisitions)
-- [SQuAD v2.0 and Data Format and Conversion](#SQuA-v2.0-and-Data-Format-and- Conversion)
+- [SQuAD v2.0 and Data Format and Conversion](#SQuAD-v2.0-and-Data-Format-and-Conversion)
 - [Configuration Files](#Configuration-Files)
 - [Fine-tune BERT QA on the SQuAD Dataset](#Fine-tune-BERT-QA-on-the-SQuAD-Dataset)
 - [BERT QA Inference ](#BERT-QA-Inference)
