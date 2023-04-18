@@ -7,6 +7,13 @@ In other words, the model extracts the answer directly from the passage, rather 
 and may not be able to generate novel or creative answers.
 This approach has been applied to customer service chatbots, search engines, voice assistants etc.
 ---
+### Table Of Contents
+- [Pre-requisitions](#Pre-requisitions)
+- [SQuAD v2.0 and Data Format and Conversion](#SQuA-v2.0-and-Data-Format-and- Conversion)
+- [Configuration Files](#Configuration-Files)
+- [Fine-tune BERT QA on the SQuAD Dataset](#Fine-tune-BERT-QA-on-the-SQuAD-Dataset)
+- [BERT QA Inference ](#BERT-QA-Inference)
+---
 ### Pre-requisitions
 **!!! You can run either this notebook locally (if you have all the dependencies and a GPU) or on Google Colab.**
 
